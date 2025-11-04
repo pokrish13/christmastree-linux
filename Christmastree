@@ -31,6 +31,7 @@ WHITE='\033[1;37m'
 NC='\033[0m'
 
 colors=($RED $YELLOW $BLUE $PINK $CYAN $WHITE)
+snowflakes=("❄" "•" "∗" "⋅")
 
 draw_tree() {
     printf "\033[2J\033[H"
@@ -52,10 +53,19 @@ draw_tree() {
     echo -e "${RED}   🎉 Happy New Year! 🎉${NC}"
 }
 
-echo -e "${GREEN}🎄 Starting Christmas Tree...${NC}"
+echo -e "${GREEN}🎄 Starting Christmas Tree with Snow...${NC}"
 sleep 1
 
 while true; do
     draw_tree
-    sleep 0.5
+    
+    # Generate snow
+    for i in {1..15}; do
+        col=$((RANDOM % 60 + 1))
+        row=$((RANDOM % 8 + 1))
+        snow=${snowflakes[$RANDOM % ${#snowflakes[@]}]}
+        echo -e "\033[${row};${col}H\033[97m${snow}\033[0m"
+    done
+    
+    sleep 0.8
 done
