@@ -38,7 +38,7 @@ draw_tree() {
     
     echo -e "${YELLOW}         ☆${NC}"
     echo -e "${GREEN}        * *${NC}"
-    echo -e "       ${GREEN}* ${rand_color}°${GREEN} * ${rand_color}°${GREEN}"
+    echo -e "       ${GREEN}* ${rand_color}°${GREEN} * ${GREEN}"
     echo -e "      * * * *"
     echo -e "     * ${rand_color}°${GREEN} * ${rand_color}°${GREEN} * ${GREEN}"
     echo -e "    * * * * * *"
