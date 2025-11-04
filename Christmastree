@@ -1,7 +1,20 @@
 #!/bin/bash
 
-# Check if script is executable, if not make it executable
-if [ ! -x "$0" ]; then
+# For one-line install: skip executable check when running via pipe
+if [[ ! -t 0 ]]; then
+    # Running via pipe (curl | bash), download and make executable
+    SCRIPT_NAME="Christmastree"
+    if [ ! -f "$SCRIPT_NAME" ]; then
+        echo "📥 Downloading Christmastree..."
+        curl -sL https://raw.githubusercontent.com/pokrish13/christmastree-linux/main/Christmastree -o "$SCRIPT_NAME"
+        chmod +x "$SCRIPT_NAME"
+        echo "✅ Downloaded! Run: ./Christmastree"
+        exit 0
+    fi
+fi
+
+# Normal executable check for direct runs
+if [ ! -x "$0" ] && [ -f "$0" ]; then
     echo "Making Christmastree executable..."
     chmod +x "$0"
     echo "✅ Now you can run: ./Christmastree"
@@ -27,17 +40,16 @@ draw_tree() {
     echo -e "${GREEN}        * *${NC}"
     echo -e "       ${GREEN}* ${rand_color}°${GREEN} * ${rand_color}°${GREEN}"
     echo -e "      * * * *"
-    echo -e "     * ${rand_color}°${GREEN} * ${rand_color}°${GREEN} * ${rand_color}°${GREEN}"
+    echo -e "     * ${rand_color}°${GREEN} * ${rand_color}°${GREEN} * ${GREEN}"
     echo -e "    * * * * * *"
-    echo -e "   * ${rand_color}°${GREEN} * ${rand_color}°${GREEN} * ${rand_color}°${GREEN} * ${rand_color}°${GREEN}"
+    echo -e "   * ${rand_color}°${GREEN} * ${rand_color}°${GREEN} * ${rand_color}°${GREEN} * ${GREEN}"
     echo -e "  * * * * * * * *"
-    echo -e " * ${rand_color}°${GREEN} * ${rand_color}°${GREEN} * ${rand_color}°${GREEN} * ${rand_color}°${GREEN} * ${rand_color}°${GREEN}"
+    echo -e " * ${rand_color}°${GREEN} * ${rand_color}°${GREEN} * ${rand_color}°${GREEN} * ${rand_color}°${GREEN} * ${GREEN}"
     echo -e "* * * * * * * * * *"
     echo -e "${YELLOW}        | |"
     echo -e "        | |${NC}"
     echo -e "${RED}   🎄 Merry Christmas! 🎄${NC}"
     echo -e "${RED}   🎉 Happy New Year! 🎉${NC}"
-    echo -e "${CYAN}   Exit with: ${WHITE}Ctrl+C${NC}"
 }
 
 echo -e "${GREEN}🎄 Starting Christmas Tree...${NC}"
